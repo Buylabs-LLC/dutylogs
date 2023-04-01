@@ -75,7 +75,7 @@ setTimeout(() => {
 
     let headers =  {
         'Content-Type': 'application/x-www-form-urlencoded',
-        'authorization': 'xLy7lI8lRFrZeSy2fjtZa5M3gdGeSRf4-8gzNYYVV3Rh5',
+        'authorization': config.license,
         'accept': 'application/json'
     }
 
