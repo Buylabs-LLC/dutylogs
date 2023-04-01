@@ -1,0 +1,46 @@
+{
+    "license": "xLy7lI8lRFrZeSy2fjtZa5M3gdGeSRf4-8gzNYYVV3Rh5",
+    "port" : 3000,
+    "ServerName" : "JSRP",
+    "NavEnabled" : true,
+    "iconUrl"    : "https://cdn.discordapp.com/attachments/916700373534777374/1048366029107122226/JSR.Xmas.png",
+    "NavBtns"    : [
+        {
+            "Name" : "Home",
+            "Url" : "/"
+        }
+    ],
+    "departments": [
+        {
+            "Name" : "BCSO",
+            "iconUrl" : "img/bcso.png"
+        },
+        {
+            "Name" : "SAST",
+            "iconUrl" : "img/sasp.png"
+        },
+        {
+            "Name" : "pubcop",
+            "iconUrl" : "img/pubcop.png"
+        },
+        {
+            "Name" : "safr",
+            "iconUrl" : "img/safr.png"
+        },
+        {
+            "Name" : "faa",
+            "iconUrl" : "img/faa.png"
+        },
+        {
+            "Name" : "STAFF",
+            "iconUrl" : "img/staff.png"
+        }
+    ],
+    "sql" : {
+        "host" : "localhost",
+        "user" : "root",
+        "pass" : "FzmsXS",
+        "database" : "evrp",
+        "port" : 3306
+    }
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/style.css">
+    <title><%= serverName || 'Dutylogs' %>  - <%= siteName %> </title>
+    <link rel="icon" type="image/png" href=" <%= icon || 'https://cdn.discordapp.com/attachments/941401907291893760/1043670781575573644/image.png' %> ">
+</head>
+<body>
+    <header>
+        <% if(locals.navEnabled) { %>
+            <nav>
+                <ul class="no-list-style">
+                    <%- 
+                        NavBtns.map((btn)=>{
+                            return `<a class="nav-btn btn no-btn-style" href="${btn.Url}"> ${btn.Name} </a>`
+                        }).join('')
+                    %> 
+                </ul>
+            </nav>
+        <% } %>
+    </header>
+
+    <main>
+
+        <% if(locals.viewDept == true){ %>
+            <table class="vert-center">
+                <thead>
+                    <tr>
+                        <th class="no-mobile">  <span style="color:transparent;">......</span>   Name  <span style="color:transparent;">......</span>   </th>
+                        <th>  <span style="color:transparent;">............</span>   Discord ID  <span style="color:transparent;">............</span>   </th>
+                        <th>Department</th>
+                        <th>  <span style="color:transparent;">......</span>   Time  <span style="color:transparent;">......</span>   </th>
+                        <th class="no-mobile">  <span style="color:transparent;">......</span>   Last Clocked In  <span style="color:transparent;">......</span>   </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%-                
+                        units.map((unit)=>{
+                        let time = timeConvertor(unit.time);
+                        
+                        return `
+                        <tr>
+                            <td>${unit.name}</td>        
+                            <td>${unit.id}</td>        
+                            <td>${unit.dept}</td>        
+                            <td>${time.hours}H ${time.minutes}M</td>   
+                            <td><time datetime="${unit.lastclockin}">${unit.lastclockin}</time></td>        
+                            </tr>
+                            `
+                        }).join('')
+                    %>
+            </tbody>
+        </table>
+        <% }else{ %> 
+            <div class="flex flex-row center-items center-old">
+                <%-
+                    deptList.map((department)=>{
+                        return `<div class="button dept-btn"> <a href='dept/${department.Name}'> <img src="${department.iconUrl}" alt="${department.Name}" /> </a> </div>`
+                    }).join('')
+                %>
+            </div> 
+        <% } %> 
+
+    </main>
+
+    <footer>
+        <span>Made by TenCreator#2627</span>
+    </footer>
+</body>
+</html>

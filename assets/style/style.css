@@ -1,0 +1,102 @@
+:root {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+body {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+    
+    background-color: rgb(23 23 23);
+
+    margin: 0px;
+    height: 100vh;
+    width: 100vw;
+
+    color:white;
+}
+
+footer {
+    position: absolute;
+
+    bottom: 4px;
+    left: 10px;
+}
+
+a {
+    color: white;
+    font-weight: 600;
+}
+
+table {
+    background-color: black;
+    padding: 0.5em;
+    position: relative;
+    text-align: center;
+}
+
+thead::after {
+    content: '';
+    position: absolute;
+    color: transparent;
+    left:0px;
+    width: 100%;
+    height: 1px;
+    background-color: white;
+}
+
+tbody > tr:nth-child(even) {
+    background-color: gray;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.center-items {
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    height: 128px;
+    width: 128px;
+    margin: 0em 1em;
+    transition: transform 250ms ease-in-out;
+}
+
+.button > a > img {
+    height: 128px;
+    width: 128px;
+}
+
+.button:hover {
+    transform: scale(1.5);
+}
+
+.vert-center {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+.hori-center {
+    position: absolute;
+    top:50%;
+    transform: translate(0%, -50%);
+}
+
+.center-old {
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
