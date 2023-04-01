@@ -5,4 +5,4 @@
 2) Open up a Terminal and type "npm i"
 3) Configure the config.json file
 4) After now type "npm start"
-Done!
+#### Done!
