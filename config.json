@@ -1,5 +1,5 @@
 {
-    "license": "xLy7lI8lRFrZeSy2fjtZa5M3gdGeSRf4-8gzNYYVV3Rh5",
+    "license": "Hbyvi_HunAnpO5JjGGJEFzrthg-L3IoouxMHhycQornOO",
     "port" : 3000,
     "ServerName" : "JSRP",
     "NavEnabled" : true,
@@ -37,10 +37,10 @@
         }
     ],
     "sql" : {
-        "host" : "localhost",
-        "user" : "root",
-        "pass" : "FzmsXS",
-        "database" : "evrp",
+        "host" : "node.tencreator.xyz",
+        "user" : "u24_Dvuzu3L6DO",
+        "pass" : "+unL!DYIY8Mejj0^@NE7Vdyn",
+        "database" : "s24_test",
         "port" : 3306
     }
 }
