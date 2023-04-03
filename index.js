@@ -1,11 +1,12 @@
 // Requirements
 const express = require('express')
 const config = require('./config.json')
-const nocache = require('nocache')
-const axios = require('axios')
 const mysql = require('mysql2')
-const https = require('https')
+const axios = require('axios')
+const chalk = require('chalk')
+let info = `Dutylogs`;
 let dutytime = []
+licenseCheck(config.license, 1)
 
 // Other consts 
 const app = express();
@@ -14,10 +15,9 @@ const print = console.log
 
 // App settings
 app.set('view engine', 'ejs');
-app.use(express.static('assets'))
 app.set('etag', false)
 app.disable('view cache');
-app.use(nocache())
+app.use(express.static('assets'))
 app.use((req, res, next) => {
     res.set('Cache-Control', 'no-store')
     next()
@@ -71,45 +71,9 @@ app.get('/user/:user', (req, res)=>{
 })
 
 // Misc
-setTimeout(() => {
-
-    let headers =  {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'authorization': config.license,
-        'accept': 'application/json'
-    }
-
-    axios.post('https://license.tencreator.xyz/api/check/1', null ,{
-        headers: headers
-    })
-    .then(res => {
-        if (res.data.pass) {
-            app.listen(config.port, () => {
-                print('████████╗███████╗███╗   ██╗ ██████╗██████╗ ███████╗ █████╗ ████████╗ ██████╗ ██████╗ ')
-                print('╚══██╔══╝██╔════╝████╗  ██║██╔════╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝██╔═══██╗██╔══██╗')
-                print('   ██║   █████╗  ██╔██╗ ██║██║     ██████╔╝█████╗  ███████║   ██║   ██║   ██║██████╔╝')
-                print('   ██║   ██╔══╝  ██║╚██╗██║██║     ██╔══██╗██╔══╝  ██╔══██║   ██║   ██║   ██║██╔══██ ')
-                print('   ██║   ███████╗██║ ╚████║╚██████╗██║  ██║███████╗██║  ██║   ██║   ╚██████╔╝██║  ██ ')
-                print('   ╚═╝   ╚══════╝╚═╝  ╚═══╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝')
-                print('                                                                                     ')
-                print('██████╗ ██╗   ██╗████████╗██╗   ██╗██╗      ██████╗  ██████╗ ███████╗                ')
-                print('██╔══██╗██║   ██║╚══██╔══╝╚██╗ ██╔╝██║     ██╔═══██╗██╔════╝ ██╔════╝                ')
-                print('██║  ██║██║   ██║   ██║    ╚████╔╝ ██║     ██║   ██║██║  ███╗███████╗                ')
-                print('██║  ██║██║   ██║   ██║     ╚██╔╝  ██║     ██║   ██║██║   ██║╚════██║                ')
-                print('██████╔╝╚██████╔╝   ██║      ██║   ███████╗╚██████╔╝╚██████╔╝███████║                ')
-                print('╚═════╝  ╚═════╝    ╚═╝      ╚═╝   ╚══════╝ ╚═════╝  ╚═════╝ ╚══════╝                ')
-                print('                                                                                     ')
-    
-                print('We successfully authenticated you with our authorisation servers!')    
-                print(`Server started on ${config.port}`);
-            });
-        } else {
-            print('We was unable to authenticate the service you are using!')
-        }
-    })
-
-
-}, 1 * 1000);
+app.listen(config.port, () => {
+    print(`Server started on ${config.port}`);
+});
 
 function toHoursAndMinutes(totalMinutes) {
     const hours = Math.floor(totalMinutes / 60);
@@ -128,4 +92,52 @@ function getDutyTime (id) {
             dutytime = res
         })
     }, 2)
+}
+
+
+// ████████╗ ██████╗ ██╗   ██╗ ██████╗██╗  ██╗    ████████╗██╗  ██╗██╗███████╗    ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗
+// ╚══██╔══╝██╔═══██╗██║   ██║██╔════╝██║  ██║    ╚══██╔══╝██║  ██║██║██╔════╝    ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║
+//    ██║   ██║   ██║██║   ██║██║     ███████║       ██║   ███████║██║███████╗    █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║
+//    ██║   ██║   ██║██║   ██║██║     ██╔══██║       ██║   ██╔══██║██║╚════██║    ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║
+//    ██║   ╚██████╔╝╚██████╔╝╚██████╗██║  ██║       ██║   ██║  ██║██║███████║    ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║
+//    ╚═╝    ╚═════╝  ╚═════╝  ╚═════╝╚═╝  ╚═╝       ╚═╝   ╚═╝  ╚═╝╚═╝╚══════╝    ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+                                                                                                                                                 
+//  █████╗ ███╗   ██╗██████╗     ██╗   ██╗ ██████╗ ██╗   ██╗██████╗     ██████╗ ███████╗ █████╗ ██████╗     ██╗                                     
+// ██╔══██╗████╗  ██║██╔══██╗    ╚██╗ ██╔╝██╔═══██╗██║   ██║██╔══██╗    ██╔══██╗██╔════╝██╔══██╗██╔══██╗    ██║                                     
+// ███████║██╔██╗ ██║██║  ██║     ╚████╔╝ ██║   ██║██║   ██║██████╔╝    ██║  ██║█████╗  ███████║██║  ██║    ██║                                     
+// ██╔══██║██║╚██╗██║██║  ██║      ╚██╔╝  ██║   ██║██║   ██║██╔══██╗    ██║  ██║██╔══╝  ██╔══██║██║  ██║    ╚═╝                                     
+// ██║  ██║██║ ╚████║██████╔╝       ██║   ╚██████╔╝╚██████╔╝██║  ██║    ██████╔╝███████╗██║  ██║██████╔╝    ██╗                                     
+// ╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝        ╚═╝    ╚═════╝  ╚═════╝ ╚═╝  ╚═╝    ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═════╝     ╚═╝  
+
+async function licenseCheck(licenseKey, uniqueId) {
+
+    // Initial Check
+    let checkres = await axios({
+        method: 'POST', // Post Request
+        url: `https://license.tencreator.xyz/api/check/${uniqueId}`, // Your domain with your license key at the end
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': licenseKey, },
+        params: { info: `${info} - Boot`, }
+    });
+    if (checkres.data.pass) { // If Authorization is accepted
+        console.log(chalk.bold.blue('The License System Has Passed.'));
+    } else { // If authorization is failed
+        console.log(chalk.bold.red('[LICSYS]: ') + chalk.bold.green('NOT FOUND - License key not found - https://license.tencreator.xyz'))
+        process.exit(1) // Terminate the NodeJS Application
+    }
+
+    // Timed check to repeat ever hour
+    setInterval(async () => {
+        let checkres = await axios({
+            method: 'POST', // Post Request
+            url: `https://license.tencreator.xyz/api/check/${uniqueId}`, // Your domain with your license key at the end
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': licenseKey, },
+            params: { info: `${info} - Check`, }
+        });
+        if (checkres.data.authorized) { // If Authorization is accepted
+            // console.log(chalk.bold.blue('The License System Has Passed.'));
+        } else { // If authorization is failed
+            console.log(chalk.bold.red('[LICSYS]: ') + chalk.bold.green('NOT FOUND - License key not found - https://license.tencreator.xyz'))
+            process.exit(1) // Terminate the NodeJS Application
+        }
+    }, 3600000); // Every 1 hour == 3600000
 }
