@@ -8,7 +8,8 @@ let info = `Dutylogs`;
 let dutytime = []
 licenseCheck(config.license, 1)
 
-// Other consts 
+// Other consts
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 const app = express();
 const deptRouter = require('./routes/deptRouter')
 const print = console.log
@@ -119,12 +120,12 @@ async function licenseCheck(licenseKey, uniqueId) {
         params: { info: `${info} - Boot`, }
     });
     if (checkres.data.pass) { // If Authorization is accepted
-        console.log(chalk.bold.blue('The License System Has Passed.'));
+        console.log(chalk.bold.red('[LICSYS]: ') + chalk.bold.blue('The License System Has Passed.'));
     } else { // If authorization is failed
         console.log(chalk.bold.red('[LICSYS]: ') + chalk.bold.green('NOT FOUND - License key not found - https://license.tencreator.xyz'))
         process.exit(1) // Terminate the NodeJS Application
     }
-
+    
     // Timed check to repeat ever hour
     setInterval(async () => {
         let checkres = await axios({
@@ -136,8 +137,16 @@ async function licenseCheck(licenseKey, uniqueId) {
         if (checkres.data.authorized) { // If Authorization is accepted
             // console.log(chalk.bold.blue('The License System Has Passed.'));
         } else { // If authorization is failed
-            console.log(chalk.bold.red('[LICSYS]: ') + chalk.bold.green('NOT FOUND - License key not found - https://license.tencreator.xyz'))
-            process.exit(1) // Terminate the NodeJS Application
+            let bothfailed = true
+            await new Promise(resolve => setTimeout(()=>{
+                if (checkres.data.authorized) {
+                    bothfailed = false
+                }
+            }, 30000))
+            if (bothfailed) {
+                console.log(chalk.bold.red('[LICSYS]: ') + chalk.bold.green('NOT FOUND - License key not found - https://license.tencreator.xyz'))
+                process.exit(1) // Terminate the NodeJS Application
+            }
         }
     }, 3600000); // Every 1 hour == 3600000
 }
