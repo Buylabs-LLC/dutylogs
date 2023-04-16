@@ -142,7 +142,7 @@ async function licenseCheck(licenseKey, uniqueId) {
                 if (checkres.data.authorized) {
                     bothfailed = false
                 }
-            }, 30000))
+            }, 3600000))
             if (bothfailed) {
                 console.log(chalk.bold.red('[LICSYS]: ') + chalk.bold.green('NOT FOUND - License key not found - https://license.tencreator.xyz'))
                 process.exit(1) // Terminate the NodeJS Application
