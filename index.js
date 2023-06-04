@@ -6,7 +6,7 @@ const axios = require('axios')
 const chalk = require('chalk')
 let info = `Dutylogs`;
 let dutytime = []
-licenseCheck(config.license, 1)
+// licenseCheck(config.license, 1)
 
 // Other consts
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
