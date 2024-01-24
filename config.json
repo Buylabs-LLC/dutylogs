@@ -1,9 +1,9 @@
 {
     "license": "",
-    "port" : 3000,
-    "ServerName" : "JSRP",
+    "port" : 4050,
+    "ServerName" : "BLRP",
     "NavEnabled" : true,
-    "iconUrl"    : "https://cdn.discordapp.com/attachments/916700373534777374/1048366029107122226/JSR.Xmas.png",
+    "iconUrl"    : "https://media.discordapp.net/attachments/916383091541573713/1177735589727060149/BuyLabs.png",
     "NavBtns"    : [
         {
             "Name" : "Home",
@@ -37,10 +37,10 @@
         }
     ],
     "sql" : {
-        "host" : "node.tencreator.xyz",
-        "user" : "u24_Dvuzu3L6DO",
-        "pass" : "+unL!DYIY8Mejj0^@NE7Vdyn",
-        "database" : "s24_test",
+        "host" : "127.0.0.1",
+        "user" : "admin",
+        "pass" : "EdLp2007@",
+        "database" : "blrp",
         "port" : 3306
     }
 }

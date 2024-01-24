@@ -100,3 +100,11 @@ tbody > tr:nth-child(even) {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+@media only screen and (max-width: 600px) {
+  .center-items {
+    justify-content: none;
+    align-items: none;
+    
+  }
+}
